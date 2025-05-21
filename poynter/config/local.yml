@@ -1,0 +1,61 @@
+---
+ALLOWED_HOSTS:
+- 127.0.0.1
+- localhost
+DEBUG: true
+LOCAL_DEV: true
+ENVIRONMENT: 'localhost'
+# ENVIRONMENT: 'production'
+
+# To pretend we are a reviewapp, set these two:
+# ENVIRONMENT: 'reviewapp'
+# PRIVATE_S3_BUCKET_PREFIX: 'pr249/'
+
+LOG_LEVEL: DEBUG
+DATABASE_URL: postgres://localhost:5432/poynter
+SECRET_KEY: uJ8dIF2VP7s67yhnsK&ddasCoASTGlB9cO4f8gxt7L2k7RI5XLs9IJhF$skOnbV4WJUSFSWJFDvEhVD267H
+LOCATIONS_LOADER_CHUNK_SIZE: 1000
+
+# Use "background" for qcluster, foreground for debugging
+# ASYNC_DEFAULT: "foreground"
+ASYNC_DEFAULT: "background"
+
+
+# Localhost and test servers share the Entra config for Cosmos staging.
+# Note two different entity IDs: One for our running instance,
+# and one for the Identify Provider assigned to handle logins for this instance.
+SAML_OUR_ENTITY_ID: "https://greenhouse-staging.energy-solution.net/idp"
+SAML_IDP_ENTITY_ID: "81a41c5a-53e4-4d0c-a7a8-742f23d76451"
+
+SAML_CERT: |
+  -----BEGIN CERTIFICATE-----
+  MIIC8DCCAdigAwIBAgIQHrmw/LVIbK9DScbdg0wJUjANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
+  EylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZpY2F0ZTAeFw0yNDA0MjUwMDMx
+  NDhaFw0yNzA0MjUwMDMxNDlaMDQxMjAwBgNVBAMTKU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQg
+  U1NPIENlcnRpZmljYXRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlhbV1esg16o4
+  AYvA30uPyDGeMdi9Tafv8B8nCm8I6mvUoZtfex00uf1sLwd3DwYQ3fuKxbLFH2hgwfsFOhPQFYnw
+  iC8+QleTUjy7ucVVyoiGcQrZGAcZH8o5rlIrfJwRMein8eBd8AR5WP73k0KV6wlA6X1NZHfNasGG
+  Xbhy+v4vgdpkN0afvyEPDmLTmGSIaZUC8gfW1PMS/jmRfnyl7pcQ84GS4LtbNPdCe2bBZE9uetFP
+  44pYc0EZgUoTtb/LwYYdaFV7MmLA86CdGZ0pu+qFeC3sYRVCIcYKelWDDsxc7D95MwDzAiUtY4Dm
+  2hMX7bOD+hRlsuPfArP4KNKcsQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBRw42oSXYPm6YVJ/Tq
+  XwIK5oKCPYigdv8iJw6UvtcgUnKe6tChB+Hhy+q4RfOjneWW//SIvMkdiyA9vC6rYY1/hQiD+t02
+  vTkrhDYRfnRYkiqlMOC7FOXNnIPZyVW0S26CicnYaFOzBahICLPZ8eBTSxUW3/zscsMSKfpg6TDd
+  jgYpEUu9uhrFFRwLsnlLg+gJI9WIxTj5bywpoGpIjEXU+huWDVWFDcjrsoR4qPqZ+QnV087qDuf4
+  1qyOt06OzO3L6PwqVIPy33bFnLv8zAFZVUWK60iLZBl3khRvv0eSWzKUgBDKVpmHyvJj8ZQv6iQG
+  beo3VcbggUxGhu7lCOa/
+  -----END CERTIFICATE-----
+
+# SSO_ENABLED: true
+# PRIVATE_API_TOKEN: 6EkTk6lC2T4YNPJDSITremyC
+PRIVATE_API_TOKEN: AEKTAZ4Sc1iVZMXOQeHNVqCXR4TZShkC
+
+SCRAMBLE_PII: true
+
+# LOCAL DEV transferring data from Iris to cosmos, set these temporarily
+# to the cosmos server bucket/prefix you're pushing to. Not normally needed.
+# PRIVATE_S3_BUCKET_NAME: "apppack-app-cosmos-prod-privates3bucket-clugo9ev2l79"
+# PRIVATE_S3_BUCKET_PREFIX: "cosmos-prod/"
+
+OPENSEARCH_INDEX_RETENTION: 3
+
+# PRIVATE_S3_BUCKET_PREFIX: "pr220/"

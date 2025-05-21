@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: django-app
+Version: 0.1.0
+Summary: A simple Django application.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: crispy-bootstrap5
+Requires-Dist: daphne
+Requires-Dist: dj-database-url
+Requires-Dist: django-alive
+Requires-Dist: django-allauth[saml,socialaccount]
+Requires-Dist: django-crispy-forms
+Requires-Dist: django-extensions
+Requires-Dist: django-redis
+Requires-Dist: django-storages
+Requires-Dist: django-stronghold
+Requires-Dist: Faker
+Requires-Dist: goodconf[yaml]
+Requires-Dist: psycopg2-binary
+Requires-Dist: pydantic
+Requires-Dist: requests
+Requires-Dist: rules
+Requires-Dist: sentry-sdk[celery]
+Requires-Dist: whitenoise
+Requires-Dist: wsgi_basic_auth
+Provides-Extra: dev
+Requires-Dist: debugpy; extra == "dev"
+Requires-Dist: django-debug-toolbar; extra == "dev"
+Requires-Dist: factory-boy; extra == "dev"
+Requires-Dist: icecream; extra == "dev"
+Requires-Dist: locust; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pytest-django; extra == "dev"
+Requires-Dist: pytest-flakefinder; extra == "dev"
+Requires-Dist: pytest-xdist; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Dynamic: license-file
+
+# poynter
+Implementation of a scrum points board in asynchronous django

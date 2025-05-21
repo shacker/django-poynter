@@ -1,0 +1,48 @@
+[project]
+name = "poynter"
+version = "0.1.0"
+description = "Points board for Django."
+readme = "README.md"
+requires-python = ">=3.11"
+# dependencies = "requirements.txt"
+dependencies = [
+  "crispy-bootstrap5",
+  "daphne",
+  "dj-database-url",
+  "django-alive",
+  "django-allauth[socialaccount, saml]",
+  "django-crispy-forms",
+  "django-extensions",
+  "django-redis",
+  "django-storages",
+  "django-stronghold",
+#   "django-webserver[pyuwsgi]",
+  "Faker",
+  "goodconf[yaml]",
+  "psycopg2-binary",
+  "pydantic",
+  "requests",
+  "rules",
+  "sentry-sdk[celery]",
+  "whitenoise",
+  # "wsgi_basic_auth",
+]
+
+
+[project.optional-dependencies]
+dev = [
+  "debugpy",
+  "django-debug-toolbar",
+  "factory-boy",
+  "icecream",
+  "locust",
+  "pre-commit",
+  "pytest-cov",
+  "pytest-django",
+  "pytest-flakefinder",
+  "pytest-xdist",
+  "ruff",
+]
+
+[project.scripts]
+"manage.py" = "poynter:manage"
