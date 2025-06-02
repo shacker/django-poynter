@@ -14,6 +14,7 @@
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
                             <th scope="col">Message</th>
+                            <th scope="col">From</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,6 +23,7 @@
                                 <td>{{ message.log_date|date:'d M Y' }}</td>
                                 <td>{{ message.log_date|time:'H:i:s' }}</td>
                                 <td>{{ message.message }}</td>
+                                <td>{{ message.profile }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from poynter.points.forms import LogMessageForm
 from poynter.points.models import LogMessage
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
 
 class HomeListView(ListView):
@@ -20,15 +21,15 @@ def about(request):
     return render(request, "points/about.html")
 
 
-# Add this code elsewhere in the file:
+@login_required
 def log_message(request):
     form = LogMessageForm(request.POST or None)
 
     if request.method == "POST":
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.log_date = datetime.now()
-            message.save()
-            return redirect("home")
+        message = form.save(commit=False)
+        message.log_date = datetime.now()
+        message.profile = request.user.profile  # Associate the message with the logged-in user
+        message.save()
+        return redirect("home")
     else:
         return render(request, "points/log_message.html", {"form": form})
