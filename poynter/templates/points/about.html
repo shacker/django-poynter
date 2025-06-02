@@ -1,5 +1,10 @@
-{% extends 'points/layout.html' %}
-
+{% extends "points/layout.html" %}
+{% block title %}Home{% endblock %}
 {% block content %}
-    <h1>{% block title %} This Django app uses databases to manage a list of user inputted items! {% endblock %}</h1>
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="display-4 mb-4">Welcome to Poynter</h1>
+    <p class="lead">Your message logging app.</p>
+  </div>
+</div>
 {% endblock %}
