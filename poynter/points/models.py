@@ -4,7 +4,6 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
 
-
 class Project(TimeStampedModel):
     """Voting Sessions are associated with projects within the organization."""
 
@@ -16,8 +15,10 @@ class Project(TimeStampedModel):
     def __str__(self):
         return f"{self.name}"
 
+
 class Vote(TimeStampedModel):
     """One user's vote on one ticket."""
+
     voter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     vote = models.SmallIntegerField(help_text="Numerical vote up to 2 digits")
 
@@ -27,7 +28,7 @@ class Vote(TimeStampedModel):
 
 class PointingSession(TimeStampedModel):
     """A session is a meeting in which users vote on stories.
-    A PointingSession has a moderator and a collection of stories.
+    A PointingSession has a moderator and a collection of tickets.
     TODO: Allow NOW or arbitrary date
     """
 
@@ -54,13 +55,23 @@ class Ticket(TimeStampedModel):
         help_text="Extracted automatically if possible, or populate manually.",
     )
     pointing_session = models.ForeignKey(PointingSession, on_delete=models.CASCADE)
+    active = models.BooleanField(
+        help_text=(
+            "The active ticket for this project is the one being voted on. "
+            "Only one ticket may be marked active per voting session at a time."
+        ),
+        null=True,
+        default=False,
+    )
 
     def __str__(self):
         return f"{self.pk}: {self.title}"
 
     def save(self, *args, **kwargs):
-        """Try to populate the title automatically. If we can't get to the remote system,
-        we can still enter the title manually."""
+        """
+        Also, try to populate the title automatically.
+        If we can't get to the remote system, we can still enter the title manually."""
+
         if not self.title:
             page = requests.get(self.url)
             text = page.text

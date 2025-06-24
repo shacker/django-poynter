@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from .forms import TicketForm
 from .models import PointingSession, Ticket, Vote, Project
 
 
@@ -7,7 +7,8 @@ class VoteAdmin(admin.ModelAdmin):
     list_display = ("created", "vote")
 
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ("title", "pointing_session", "created")
+    form = TicketForm
+    list_display = ("title", "active", "pointing_session", "created")
 
 class PointingSessionAdmin(admin.ModelAdmin):
     list_display = ("moderator", "project", "session_date", )
