@@ -1,33 +1,8 @@
-{% extends "points/layout.html" %}
+{% extends "points/base.html" %}
 {% block title %}
     Home
 {% endblock %}
 {% block content %}
-    <h2>Votes</h2>
-
-    {% if vote_list %}
-        <div class="table-responsive my-4">
-            <table class="table table-striped table-hover align-middle">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Vote</th>
-                        <th scope="col">Voter</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for vote in vote_list %}
-                        <tr>
-                            <td>{{ vote.created|date:'SHORT_DATETIME_FORMAT' }}</td>
-                            <td>{{ vote.vote }}</td>
-                            <td>{{ vote.voter }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% else %}
-        <p>No votes have been logged. Use the <a href="{% url 'vote' %}">Vote form</a>.</p>
-    {% endif %}
+    Content TK
 
 {% endblock %}

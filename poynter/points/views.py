@@ -4,17 +4,14 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from poynter.points.forms import VoteForm
 from poynter.points.models import Vote
-from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
 
-class HomeListView(ListView):
-    """Renders the home page, with a list of all messages."""
-    model = Vote
+@login_required
+def home(request):
+    "Homepage TBD"
+    return render(request, "points/home.html", {})
 
-    def get_context_data(self, **kwargs):
-        context = super(HomeListView, self).get_context_data(**kwargs)
-        return context
 
 def about(request):
     return render(request, "points/about.html")
@@ -22,6 +19,7 @@ def about(request):
 
 @login_required
 def vote(request):
+    "Submit a vote - TODO show what we're voting on"
     form = VoteForm(request.POST or None)
 
     if request.method == "POST":
@@ -29,6 +27,13 @@ def vote(request):
         message.log_date = datetime.now()
         message.voter = request.user  # Associate the message with the logged-in user
         message.save()
-        return redirect("home")
+        return redirect("points:votes")
     else:
         return render(request, "points/vote.html", {"form": form})
+
+@login_required
+def votes(request):
+    "Filtered list of votes"
+    votes = Vote.objects.all()
+    return render(request, "points/votes.html", {"votes": votes})
+
