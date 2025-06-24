@@ -1,17 +1,17 @@
 from django.test import TestCase, Client
 from django.utils import timezone
-from .models import LogMessage
+from .models import Vote
 
-class TestLogMessageModel(TestCase):
+class TestVoteModel(TestCase):
 
     def setUp(self):
-        self.log_message = LogMessage.objects.create(
+        self.log_message = Vote.objects.create(
             message='Test Message',
             log_date=timezone.now()
         )
 
     def test_log_message_creation(self):
-        self.assertTrue(isinstance(self.log_message, LogMessage))
+        self.assertTrue(isinstance(self.log_message, Vote))
         self.assertEqual(self.log_message.message, 'Test Message')
 
     def test_log_message_str(self):
@@ -29,4 +29,3 @@ class TestViews(TestCase):
         response = self.client.get('/a-url-that-does-not-exist')
 
         self.assertEquals(response.status_code, 404)
- 

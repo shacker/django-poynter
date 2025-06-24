@@ -1,9 +1,9 @@
 from django import forms
 
-from poynter.points.models import LogMessage
+from poynter.points.models import Vote
 
 
-class LogMessageForm(forms.ModelForm):
+class VoteForm(forms.ModelForm):
     class Meta:
-        model = LogMessage
-        fields = ("message",)
+        model = Vote
+        fields = ("vote",)

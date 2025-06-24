@@ -3,36 +3,31 @@
     Home
 {% endblock %}
 {% block content %}
-    <h2>Messages</h2>
+    <h2>Votes</h2>
 
-    {% if message_list %}
-        {% if message_list %}
-            <div class="table-responsive my-4">
-                <table class="table table-striped table-hover align-middle">
-                    <thead class="table-primary">
+    {% if vote_list %}
+        <div class="table-responsive my-4">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">From</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vote in vote_list %}
                         <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Message</th>
-                            <th scope="col">From</th>
+                            <td>{{ vote.log_date|date:'SHORT_DATETIME_FORMAT' }}</td>
+                            <td>{{ vote.vote }}</td>
+                            <td>{{ vote.profile }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for message in message_list %}
-                            <tr>
-                                <td>{{ message.log_date|date:'d M Y' }}</td>
-                                <td>{{ message.log_date|time:'H:i:s' }}</td>
-                                <td>{{ message.message }}</td>
-                                <td>{{ message.profile }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <p>No messages have been logged. Use the <a href="{% url 'log' %}">Log Message form</a>.</p>
-        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        <p>No messages have been logged. Use the <a href="{% url 'log' %}">Log Message form</a>.</p>
+        <p>No votes have been logged. Use the <a href="{% url 'vote' %}">Vote form</a>.</p>
     {% endif %}
+
 {% endblock %}

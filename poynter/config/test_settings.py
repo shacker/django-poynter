@@ -61,7 +61,6 @@ STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.StaticF
 CELERY_TASK_ALWAYS_EAGER = True
 
 # Default in config.py, but local dev may have overriddenin local.yml. Tests should still use this.
-GREENHOUSE_URL = "https://greenhouse-staging.energy-solution.net"
 
 # Always use refresh instead of waiting
 OPENSEARCH_REFRESH_DELAY = 0

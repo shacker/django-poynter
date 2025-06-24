@@ -17,6 +17,25 @@ class AppConfig(GoodConf):
     # Load local env vars
     model_config = {"default_files": ["poynter/config/local.yml", "poynter/config/local.json"]}
 
+    ASYNC_DEFAULT: str = Field(
+        default="background", description="Controls whether async_task calls run in fg or bg."
+    )
+    DEBUG: bool = Field(default=False, description="Toggle debugging.")
+    ENVIRONMENT: str = Field(
+        default="localhost", description="Environment where application is deployed."
+    )
+
+    SECRET_KEY: str = Field(
+        initial=lambda: base64.b64encode(os.urandom(60)).decode(),
+        description="Used for cryptographic signing. "
+        "https://docs.djangoproject.com/en/2.0/ref/settings/#secret-key",
+    )
+
+    DATABASE_URL: str = Field(
+        default="postgres://localhost:5432/apppack-template", description="Database connection."
+    )
+
+    LOG_LEVEL: str = Field(default="INFO", description="Log level for application")
 
 config = AppConfig()
 
