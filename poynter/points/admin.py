@@ -1,19 +1,18 @@
 from django.contrib import admin
-from .models import Vote, PointingSession, Ticket
-from poynter.points.models import Profile
 
-
-
+from .models import PointingSession, Ticket, Vote
 
 
 class VoteAdmin(admin.ModelAdmin):
-    list_display = ("profile", "log_date", "vote")
+    list_display = ("created", "vote")
 
 class TicketAdmin(admin.ModelAdmin):
     list_display = ("title", "pointing_session", "created")
 
+class PointingSessionAdmin(admin.ModelAdmin):
+    list_display = ("moderator", "session_date", )
+
 
 admin.site.register(Vote, VoteAdmin)
-admin.site.register(Profile)
-admin.site.register(PointingSession)
+admin.site.register(PointingSession, PointingSessionAdmin)
 admin.site.register(Ticket, TicketAdmin)

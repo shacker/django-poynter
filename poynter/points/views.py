@@ -27,7 +27,7 @@ def vote(request):
     if request.method == "POST":
         message = form.save(commit=False)
         message.log_date = datetime.now()
-        message.profile = request.user.profile  # Associate the message with the logged-in user
+        message.voter = request.user  # Associate the message with the logged-in user
         message.save()
         return redirect("home")
     else:

@@ -11,16 +11,16 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">Date</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">From</th>
+                        <th scope="col">Vote</th>
+                        <th scope="col">Voter</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for vote in vote_list %}
                         <tr>
-                            <td>{{ vote.log_date|date:'SHORT_DATETIME_FORMAT' }}</td>
+                            <td>{{ vote.created|date:'SHORT_DATETIME_FORMAT' }}</td>
                             <td>{{ vote.vote }}</td>
-                            <td>{{ vote.profile }}</td>
+                            <td>{{ vote.voter }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
