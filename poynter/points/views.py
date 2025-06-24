@@ -3,14 +3,15 @@ from django.utils.timezone import datetime
 from django.shortcuts import render
 from django.shortcuts import redirect
 from poynter.points.forms import VoteForm
-from poynter.points.models import Vote
+from poynter.points.models import Vote, Project
 from django.contrib.auth.decorators import login_required
 
 
 @login_required
 def home(request):
-    "Homepage TBD"
-    return render(request, "points/home.html", {})
+    "List spaces - projects and their pointing moderators"
+    projects = Project.objects.all()
+    return render(request, "points/home.html", {"projects": projects})
 
 
 def about(request):
@@ -36,4 +37,3 @@ def votes(request):
     "Filtered list of votes"
     votes = Vote.objects.all()
     return render(request, "points/votes.html", {"votes": votes})
-

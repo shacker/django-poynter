@@ -1,8 +1,43 @@
 {% extends "points/base.html" %}
-{% block title %}
-    Home
-{% endblock %}
+
+{% block title %}Points Home{% endblock %}
+
 {% block content %}
-    Content TK
+    <h3>Pointing Spaces</h3>
+
+    <table class="table">
+        <thead>
+            <tr class="d-flex mb-4">
+                <th scope="col" class="col-2">Project</th>
+                <th scope="col" class="col-2">Moderator</th>
+                <th scope="col" class="col-2">Open for Voting</th>
+            </tr>
+        </thead>
+        {% for project in projects %}
+            {% if project.space_set.all %}
+                <tr class="d-flex table-light">
+                    <td class="col-2"><b>{{ project }}</b></td>
+                    <td class="col-2"></td>
+                    <td class="col-2"></td>
+                </tr>
+            {% endif %}
+                {% for space in project.space_set.all  %}
+                    <tr class="d-flex">
+                        <td class="col-2"></td>
+                        <td class="col-2">
+                            <b>{{ space.moderator }}</b>
+                        </td>
+                        <td class="col-2">
+                            {% if space.is_open %}
+                                <p class="fs-4">
+                                <a href=""><i class="bi bi-door-open"></i></a>
+                                </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+        {% endfor %}
+
+    </table>
 
 {% endblock %}
