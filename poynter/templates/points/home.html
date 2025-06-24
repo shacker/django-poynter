@@ -7,10 +7,10 @@
 
     <table class="table">
         <thead>
-            <tr class="d-flex mb-4">
+            <tr class="d-flex">
                 <th scope="col" class="col-2">Project</th>
                 <th scope="col" class="col-2">Moderator</th>
-                <th scope="col" class="col-2">Open for Voting</th>
+                <th scope="col" class="col-2">Space</th>
             </tr>
         </thead>
         {% for project in projects %}
@@ -28,11 +28,9 @@
                             <b>{{ space.moderator }}</b>
                         </td>
                         <td class="col-2">
-                            {% if space.is_open %}
-                                <p class="fs-4">
+                            <p class="fs-4">
                                 <a href=""><i class="bi bi-door-open"></i></a>
-                                </p>
-                            {% endif %}
+                            </p>
                         </td>
                     </tr>
                 {% endfor %}
