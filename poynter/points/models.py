@@ -26,24 +26,24 @@ class Vote(TimeStampedModel):
         return f"'{self.voter}' on {self.created.strftime('%A, %d %B, %Y at %X')}"
 
 
-class PointingSession(TimeStampedModel):
-    """A session is a meeting in which users vote on stories.
+class Space(TimeStampedModel):
+    """A space is a meeting locations owned by a combination of one moderator in one project.
+    A permanent URL goes with each space. Results of voting sessions are captured as JSON documents
+    for posterity.
     A PointingSession has a moderator and a collection of tickets.
     TODO: Allow NOW or arbitrary date
     """
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     moderator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    session_date = models.DateTimeField("Voting window")
     is_open = models.BooleanField(help_text="Voting is currently open", default=False)
 
     def __str__(self):
-        return f"{self.moderator.username}: {self.session_date.strftime('%A, %d %B, %Y at %X')}"
+        return f"{self.moderator.username}: {self.project}"
+
 
     class Meta:
-        verbose_name = "Voting Session"
-        verbose_name_plural = "Voting Sessions"
-
+        unique_together = [("project", "moderator",)]
 
 class Ticket(TimeStampedModel):
     """A ticket reference (e.g. to Jira), to be stored in a PointingSession and voted upon by users."""
@@ -54,7 +54,7 @@ class Ticket(TimeStampedModel):
         blank=True,
         help_text="Extracted automatically if possible, or populate manually.",
     )
-    pointing_session = models.ForeignKey(PointingSession, on_delete=models.CASCADE)
+    pointing_session = models.ForeignKey(Space, on_delete=models.CASCADE)
     active = models.BooleanField(
         help_text=(
             "The active ticket for this project is the one being voted on. "
