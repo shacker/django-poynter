@@ -8,10 +8,10 @@ class VoteAdmin(admin.ModelAdmin):
 
 class TicketAdmin(admin.ModelAdmin):
     form = TicketForm
-    list_display = ("title", "active", "pointing_session", "created")
+    list_display = ("title", "active", "space", "created")
 
 class SpaceAdmin(admin.ModelAdmin):
-    list_display = ("project", "moderator")
+    list_display = ("project", "moderator", "is_open")
 
 
 admin.site.register(Vote, VoteAdmin)

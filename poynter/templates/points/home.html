@@ -3,7 +3,15 @@
 {% block title %}Points Home{% endblock %}
 
 {% block content %}
-    <h3>Pointing Spaces</h3>
+    <h2>Pointing Spaces</h2>
+
+    <div class="text-muted mb-4">
+    {% if open_spaces %}
+        Click open door to enter a voting space.
+    {% else %}
+        No spaces are currently open for voting, sorry.
+    {% endif %}
+    </div>
 
     <table class="table">
         <thead>
@@ -29,13 +37,17 @@
                         </td>
                         <td class="col-2">
                             <p class="fs-4">
-                                <a href=""><i class="bi bi-door-open"></i></a>
+                                {% if space.is_open %}
+                                    <a href="{% url 'points:space' space.slug %}">
+                                        <i class="bi bi-door-open"></i>
+                                    </a>
+                                {% else %}
+                                    <i class="bi bi-door-closed"></i>
+                                {% endif %}
                             </p>
                         </td>
                     </tr>
                 {% endfor %}
         {% endfor %}
-
     </table>
-
 {% endblock %}

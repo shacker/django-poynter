@@ -2,7 +2,7 @@ import requests
 from django.conf import settings
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
-
+from django_extensions.db.fields import AutoSlugField
 
 class Project(TimeStampedModel):
     """Voting Sessions are associated with projects within the organization."""
@@ -36,6 +36,7 @@ class Space(TimeStampedModel):
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     moderator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    slug = AutoSlugField(populate_from=['project', 'moderator'])
     is_open = models.BooleanField(help_text="Voting is currently open", default=False)
 
     def __str__(self):
@@ -54,7 +55,7 @@ class Ticket(TimeStampedModel):
         blank=True,
         help_text="Extracted automatically if possible, or populate manually.",
     )
-    pointing_session = models.ForeignKey(Space, on_delete=models.CASCADE)
+    space = models.ForeignKey(Space, on_delete=models.CASCADE)
     active = models.BooleanField(
         help_text=(
             "The active ticket for this project is the one being voted on. "

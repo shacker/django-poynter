@@ -1,0 +1,105 @@
+{% extends "points/base.html" %}
+
+{% block title %}Space {{ space.slug }}<{% endblock %}
+
+{% block extra_style %}
+  <style>
+    .points-buttons button.btn  {
+        font-size: 200%;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+    .badge {
+        font-size: 200%;
+    }
+    .borderless td, .borderless th {
+        border: none;
+    }
+  </style>
+{% endblock extra_style %}
+
+{% block content %}
+
+
+    {% if space.is_open %}
+        <h2 class="mb-4">Voting in space {{ space.slug }}</h2>
+
+        <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <h3>Current ticket:</h3>
+                <a href="{{ ticket.url }}" target="_blank">{{ active_ticket }}</a>
+
+                <table class="table borderless mt-4 mb-4">
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                One <span class="badge badge-light">1</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                Two <span class="badge badge-light">2</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                Three <span class="badge badge-light">3</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                Five <span class="badge badge-light">5</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                Eight <span class="badge badge-light">8</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                Thirteen <span class="badge badge-light">13</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <h3 class="mt-4">Remaining tickets for today</h3>
+                <ul>
+                    {% for ticket in space.ticket_set.all %}
+                        <li>
+                            <a href="{{ ticket.url }}" target="_blank">{{ ticket }}</a>
+                            {% if ticket.active %}VOTE{% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <div class="col-2">
+                <h4>Participating</h4>
+                <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">shacker</li>
+                    <li class="list-group-item">rob</li>
+                    <li class="list-group-item">emullaney</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+    {% else %}
+        {{ space.slug }} is not currently open for voting.
+    {% endif %}
+
+{% endblock %}

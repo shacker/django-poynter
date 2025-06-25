@@ -1,17 +1,28 @@
-
-from django.utils.timezone import datetime
-from django.shortcuts import render
-from django.shortcuts import redirect
-from poynter.points.forms import VoteForm
-from poynter.points.models import Vote, Project
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.timezone import datetime
+
+from poynter.points.forms import VoteForm
+from poynter.points.models import Project, Space, Ticket, Vote
 
 
 @login_required
 def home(request):
     "List spaces - projects and their pointing moderators"
     projects = Project.objects.all()
-    return render(request, "points/home.html", {"projects": projects})
+    open_spaces = Space.objects.filter(is_open=True)
+    return render(request, "points/home.html", {"projects": projects, "open_spaces": open_spaces})
+
+@login_required
+def space(request, slug: str):
+    "Detail view for a voting space has permanent URL for a moderator and project."
+    space = get_object_or_404(Space, slug=slug)
+
+    # try/except
+    active_ticket = space.ticket_set.get(active=True)
+
+
+    return render(request, "points/space.html", {"space": space, "active_ticket": active_ticket})
 
 
 def about(request):
@@ -37,3 +48,6 @@ def votes(request):
     "Filtered list of votes"
     votes = Vote.objects.all()
     return render(request, "points/votes.html", {"votes": votes})
+
+
+

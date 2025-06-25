@@ -20,10 +20,10 @@ class TicketForm(forms.ModelForm):
     def clean(self):
 
         cleaned_data = super().clean()
-        pointing_session = cleaned_data.get("pointing_session")
-        if pointing_session.ticket_set.exclude(id=self.instance.id).filter(active=True):
+        space = cleaned_data.get("space")
+        if self.instance.active and space.ticket_set.exclude(id=self.instance.id).filter(active=True):
             raise forms.ValidationError(
-                "Another ticket is already listed as active in this PointingSession. "
+                "Another ticket is already listed as active in this Space. "
                 "Set others to Unknown before changing this one."
             )
         return self.cleaned_data
