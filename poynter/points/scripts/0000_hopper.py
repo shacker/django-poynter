@@ -2,8 +2,11 @@ import logging
 from poynter.points.models import Project, Ticket, Space
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
+from faker import Faker
 
 log = logging.getLogger(__name__)
+
+fake = Faker()
 
 
 """One-time script demo. Run with:
@@ -55,7 +58,11 @@ def run(*args):
         Ticket.objects.filter(space=space).delete()
 
         for x in range(5):
-            ticket = Ticket.objects.create(url="http://example.com", title="Fake words here", space=space)
+            ticket = Ticket.objects.create(
+                url="http://example.com",
+                title=fake.sentence().strip("."),
+                space=space
+            )
         # Set last ticket to active
         ticket.active = True
         ticket.save()
