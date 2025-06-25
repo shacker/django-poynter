@@ -1,10 +1,9 @@
 [project]
 name = "poynter"
 version = "0.1.0"
-description = "Points board for Django."
+description = "Software pointing board for Django apps."
 readme = "README.md"
-requires-python = ">=3.11"
-# dependencies = "requirements.txt"
+requires-python = ">=3.13"
 dependencies = [
   "crispy-bootstrap5",
   "daphne",
@@ -15,7 +14,7 @@ dependencies = [
   "django-extensions",
   "django-redis",
   "django-storages",
-  "django-stronghold",
+  "django-require-login",
 #   "django-webserver[pyuwsgi]",
   "Faker",
   "goodconf[yaml]",
@@ -39,8 +38,6 @@ dev = [
   "pre-commit",
   "pytest-cov",
   "pytest-django",
-  "pytest-flakefinder",
-  "pytest-xdist",
   "ruff",
 ]
 

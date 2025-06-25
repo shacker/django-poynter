@@ -39,16 +39,24 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "poynter.points",
+]
+
+THIRD_PARTY_APPS = [
     "django_extensions",
 ]
+
+LOCAL_APPS = [
+    "poynter.points",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -58,6 +66,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_require_login.middleware.LoginRequiredMiddleware",
+
 ]
 
 ROOT_URLCONF = "poynter.urls"
@@ -141,3 +151,18 @@ CACHES = {
         "TIMEOUT": 60 * 60 * 24 * 30,  # 30 days
     }
 }
+
+
+
+# All URLs are login-required via django-stronghold, *except* those named in these tuples
+# (one for named URLs, another for URL regexes, useful for catching pattern groups):
+# STRONGHOLD_DEFAULTS = True
+# STRONGHOLD_PUBLIC_NAMED_URLS = (
+#     "home",
+# )
+# STRONGHOLD_PUBLIC_URLS = (
+#     r"/-/.*",
+#     r"/accounts/login*",
+#     r"/accounts/saml*",
+#     r"/accounts/password/reset/*",
+# )

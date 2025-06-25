@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required
+
 from django.http import HttpResponse
 from django.core.cache import cache
 
 
-@login_required
+
 def tally_single(request):
     """HTMX view receives POST from a voting space, and logs
     the space name, username, and vote.

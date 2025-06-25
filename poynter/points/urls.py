@@ -11,7 +11,5 @@ urlpatterns = [
     path("vote/", views.vote, name="vote"),
     path("space/<str:slug>", views.space, name="space"),
     path("tally/single/", views_htmx.tally_single, name="tally_single"),
-
-
 ]
 

@@ -58,6 +58,7 @@ def run(*args):
         Ticket.objects.filter(space=space).delete()
 
         for x in range(5):
+            # Using manual ticket titles here, not extracting automatically
             ticket = Ticket.objects.create(
                 url="http://example.com",
                 title=fake.sentence().strip("."),

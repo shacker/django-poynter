@@ -7,7 +7,7 @@ django-crispy-forms
 django-extensions
 django-redis
 django-storages
-django-stronghold
+django-require-login
 Faker
 goodconf[yaml]
 psycopg2-binary
@@ -16,7 +16,6 @@ requests
 rules
 sentry-sdk[celery]
 whitenoise
-wsgi_basic_auth
 
 [dev]
 debugpy
@@ -27,6 +26,4 @@ locust
 pre-commit
 pytest-cov
 pytest-django
-pytest-flakefinder
-pytest-xdist
 ruff
