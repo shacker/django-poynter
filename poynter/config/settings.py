@@ -125,3 +125,19 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# To clear all redis caches, do: `redis-cli; flushall`
+# To suppress caching for debug purposes, use dummy cache below instead.
+REDIS_PREFIX = config.REDIS_PREFIX
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"{config.REDIS_URL}/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "IGNORE_EXCEPTIONS": False,
+        },
+        "KEY_PREFIX": REDIS_PREFIX,
+        "TIMEOUT": 60 * 60 * 24 * 30,  # 30 days
+    }
+}

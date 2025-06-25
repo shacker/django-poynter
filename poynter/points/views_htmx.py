@@ -1,11 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-
+from django.core.cache import cache
 
 
 @login_required
-@csrf_exempt  # For demo purposes - use proper CSRF handling in production
 def tally_single(request):
     """HTMX view receives POST from a voting space, and logs
     the space name, username, and vote.
@@ -17,21 +15,24 @@ def tally_single(request):
     """
     if request.method == "POST":
         data = request.POST
+
         username = data.get("username")
         vote = data.get("number")
         space = data.get("space")
         ticket = data.get("ticket")
 
-        space_key = f"{space}_{username}_{ticket}"
-        value = {
+        # To allow user to override their vote, write every time
+        cache_key = f"{space}_{username}_{ticket}"
+        vote_data = {
             "space": space,
             "username": username,
             "ticket": ticket,
             "vote": vote
         }
+        cache.set(cache_key, vote_data)
 
-    # TODO: Store dict in redis for later retrieval...
+    # retrieved = cache.get("space_*")
 
-    return HttpResponse("Nothing")
+    return HttpResponse(status=204) # Do nothing
 
 

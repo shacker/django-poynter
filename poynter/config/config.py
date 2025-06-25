@@ -37,6 +37,9 @@ class AppConfig(GoodConf):
 
     LOG_LEVEL: str = Field(default="INFO", description="Log level for application")
 
+    REDIS_URL: str = Field(default="redis://127.0.0.1:6379")
+    REDIS_PREFIX: str = Field(default="poynter")
+
 config = AppConfig()
 
 
